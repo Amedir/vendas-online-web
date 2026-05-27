@@ -32,14 +32,6 @@ export default defineConfig([
         ecmaFeatures: { jsx: true },
       },
     },
-    settings: {
-      'import/resolver': {
-        node: {
-          paths: ['src'],
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        },
-      },
-    },
     rules: {
       'prettier/prettier': ['error', {}, { usePrettierrc: true }],
       'react/react-in-jsx-scope': 'off',

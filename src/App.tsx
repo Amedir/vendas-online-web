@@ -1,6 +1,7 @@
 import './App.css';
 
 import { useState } from 'react';
+import styled from 'styled-components';
 
 import heroImg from './assets/hero.png';
 import reactLogo from './assets/react.svg';
@@ -100,5 +101,15 @@ function App() {
     </>
   );
 }
+
+interface PStyledLink {
+  isBlue?: boolean;
+}
+
+const StyledLink = styled.div<PStyledLink>`
+  color: pink;
+  font-weight: bold;
+  background-color: red;
+`;
 
 export default App;
