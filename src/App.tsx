@@ -31,7 +31,7 @@ function App() {
 
       <div className="ticks"></div>
 
-      <section id="next-steps">
+      <StyledLink id="next-steps">
         <div id="docs">
           <svg className="icon" role="presentation" aria-hidden="true">
             <use href="/icons.svg#documentation-icon"></use>
@@ -94,7 +94,7 @@ function App() {
             </li>
           </ul>
         </div>
-      </section>
+      </StyledLink>
 
       <div className="ticks"></div>
       <section id="spacer"></section>
