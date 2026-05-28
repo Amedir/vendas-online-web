@@ -1,3 +1,4 @@
+import axios, { type AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import Button from '../../../shared/buttons/button/button';
@@ -10,20 +11,46 @@ import {
   TitleLogin,
 } from '../styles/loginScreen.styles';
 
+interface ReturnObject {
+  accessToken: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    cpf: string;
+  };
+}
+
 const LoginScreen = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
-  const handleLogin = () => {
-    console.log(`${username} ${password}`);
+  const handleLogin = async () => {
+    const returnObject: ReturnObject = await axios({
+      method: 'POST',
+      url: 'https://revolt-smartly-whoopee.ngrok-free.dev/auth',
+      data: {
+        email: email,
+        password: password,
+      },
+    })
+      .catch((error) => {
+        console.log(`error ${error}`);
+      })
+      .then((result: AxiosResponse<ReturnObject>) => {
+        console.log(`result ${result.data.user.id}`);
+        return result.data;
+      });
+    console.log(`returnObject ${returnObject}`);
   };
 
   return (
@@ -41,7 +68,7 @@ const LoginScreen = () => {
             placeholder="Digite seu usuário"
             margin="20px 0px"
             onChange={handleUsername}
-            value={username}
+            value={email}
           />
           <Input
             title="Senha"
