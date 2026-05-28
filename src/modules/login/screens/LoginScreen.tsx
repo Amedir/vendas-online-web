@@ -1,4 +1,4 @@
-import Button from '../../../shared/inputs/input/buttons/button/button';
+import Button from '../../../shared/buttons/button/button';
 import Input from '../../../shared/inputs/input/input';
 import {
   BackgroudImage,
