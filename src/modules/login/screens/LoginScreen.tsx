@@ -40,7 +40,7 @@ const LoginScreen = () => {
       <ContainerLogin>
         <LimitedContainer>
           <SVGLogo width={200} height={200} />
-          <TitleLogin level={2} type="danger">
+          <TitleLogin level={2} type="secondary">
             LOGIN
           </TitleLogin>
           <Input
