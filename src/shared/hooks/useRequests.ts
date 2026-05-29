@@ -2,6 +2,7 @@ import axios, { type AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import { useGlobalContext } from '../contexts/globalContext';
+import { connectionAPIPost } from '../functions/connection/connectionAPI';
 
 export const useRequests = () => {
   const [loading, setLoading] = useState(false);
@@ -28,24 +29,18 @@ export const useRequests = () => {
 
   const postRequest = async (url: string, body: unknown) => {
     setLoading(true);
-    const returnData = await axios({
-      method: 'post',
-      url: url,
-      data: body,
-    })
+    const returnData = await connectionAPIPost(url, body)
       .then((result: AxiosResponse) => {
         setNotification({
-          message: 'Sucesso...',
+          message: 'Acessando aplicação...',
           type: 'success',
-          description: 'Entrando na aplicação...',
         });
-        return result.data;
+        return result;
       })
-      .catch(() => {
+      .catch((error: Error) => {
         setNotification({
-          message: 'Erro ao fazer requisição',
+          message: error.message,
           type: 'error',
-          description: 'Ocorreu um erro ao tentar realizar login',
         });
       });
 
