@@ -15,7 +15,10 @@ const mainRoutes: RouteObject[] = [
   },
 ];
 
-const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([...loginRoutes, ...mainRoutes]);
+const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
+  ...loginRoutes,
+  ...mainRoutes,
+]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

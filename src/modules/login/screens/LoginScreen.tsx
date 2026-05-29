@@ -1,9 +1,9 @@
-import axios, { type AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-import Button from '../../../shared/buttons/button/button';
-import SVGLogo from '../../../shared/icons/SVGLogo';
-import Input from '../../../shared/inputs/input/input';
+import Button from '../../../shared/components/buttons/button/button';
+import SVGLogo from '../../../shared/components/icons/SVGLogo';
+import Input from '../../../shared/components/inputs/input/input';
+import { useRequests } from '../../../shared/hooks/useRequests';
 import {
   BackgroudImage,
   ContainerLogin,
@@ -11,20 +11,10 @@ import {
   TitleLogin,
 } from '../styles/loginScreen.styles';
 
-interface ReturnObject {
-  accessToken: string;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-    phone: string;
-    cpf: string;
-  };
-}
-
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { loading, postRequest } = useRequests();
 
   const handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -35,22 +25,10 @@ const LoginScreen = () => {
   };
 
   const handleLogin = async () => {
-    const returnObject: ReturnObject = await axios({
-      method: 'POST',
-      url: 'https://revolt-smartly-whoopee.ngrok-free.dev/auth',
-      data: {
-        email: email,
-        password: password,
-      },
-    })
-      .catch((error) => {
-        console.log(`error ${error}`);
-      })
-      .then((result: AxiosResponse<ReturnObject>) => {
-        console.log(`result ${result.data.user.id}`);
-        return result.data;
-      });
-    console.log(`returnObject ${returnObject}`);
+    postRequest('https://revolt-smartly-whoopee.ngrok-free.dev/auth', {
+      email: email,
+      password: password,
+    });
   };
 
   return (
@@ -77,7 +55,13 @@ const LoginScreen = () => {
             value={password}
             type="password"
           />
-          <Button title="Entrar" type="primary" margin="20px 0px 0px" onClick={handleLogin}>
+          <Button
+            loading={loading}
+            title="Entrar"
+            type="primary"
+            margin="20px 0px 0px"
+            onClick={handleLogin}
+          >
             Entrar
           </Button>
         </LimitedContainer>
