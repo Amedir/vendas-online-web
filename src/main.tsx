@@ -6,6 +6,7 @@ import type { RouteObject } from 'react-router';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
 import { loginRoutes } from './modules/login/route.tsx';
+import { GlobalProvider } from './shared/hooks/useGlobalContext.tsx';
 
 const mainRoutes: RouteObject[] = [
   {
@@ -22,6 +23,8 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <GlobalProvider>
+      <RouterProvider router={router} />
+    </GlobalProvider>
   </StrictMode>,
 );

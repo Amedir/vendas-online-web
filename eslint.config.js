@@ -37,6 +37,14 @@ export default defineConfig([
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
     },

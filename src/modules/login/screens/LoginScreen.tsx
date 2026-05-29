@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from '../../../shared/components/buttons/button/button';
 import SVGLogo from '../../../shared/components/icons/SVGLogo';
 import Input from '../../../shared/components/inputs/input/input';
+import { useGlobalContext } from '../../../shared/contexts/globalContext';
 import { useRequests } from '../../../shared/hooks/useRequests';
 import {
   BackgroudImage,
@@ -12,6 +13,7 @@ import {
 } from '../styles/loginScreen.styles';
 
 const LoginScreen = () => {
+  const { accessToken, setAccessToken } = useGlobalContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { loading, postRequest } = useRequests();
